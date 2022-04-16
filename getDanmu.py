@@ -1,9 +1,5 @@
 import requests
-import io, sys
 import csv
-
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-
 
 class Danmu():
     def __init__(self):
