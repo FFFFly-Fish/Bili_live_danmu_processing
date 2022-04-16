@@ -60,6 +60,7 @@ class Danmu():
 
 
 if __name__ == '__main__':
+
     bDanmu = Danmu()
     bDanmu.get_Danmu_room()
     bDanmu.get_Danmu_admin()
