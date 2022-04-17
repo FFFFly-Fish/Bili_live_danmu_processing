@@ -12,7 +12,7 @@ class Danmu():
         }
         # 定义post参数
         self.data = {
-            'roomid': '5170',  # 直播房间id,不一定是直播间号
+            'roomid': '33989',  # 直播房间id,不一定是直播间号
             'csrf_token': '',
             'csrf': '',
             'visit_id': '',
@@ -26,15 +26,15 @@ class Danmu():
             text = content['text']
             timeline = content['timeline']
 
-            msg_json = [{
-                '用户': nickname,
-                '内容': text,
-                '时间': timeline
-            }]
-            print(msg_json)  # 查看json格式
+            # msg_json = [{
+            #     '用户': nickname,
+            #     '内容': text,
+            #     '时间': timeline
+            # }]
+            # # print(msg_json)  # 查看json格式
 
             # 存为csv文件
-            with open('data.csv', 'a', encoding='utf-8') as f1:
+            with open('./DataSave/data.csv', 'a', encoding='utf-8') as f1:
                 writer = csv.writer(f1)
                 writer.writerow([nickname, text, timeline])
 
@@ -46,21 +46,20 @@ class Danmu():
             text = content['text']
             timeline = content['timeline']
 
-            msg_json = [{
-                '用户': nickname,
-                '内容': text,
-                '时间': timeline
-            }]
-            print(msg_json)  # 查看json格式
+            # msg_json = [{
+            #     '用户': nickname,
+            #     '内容': text,
+            #     '时间': timeline
+            # }]
+            # print(msg_json)  # 查看json格式
 
             # 存为csv文件
-            with open('data.csv', 'a', encoding='utf-8') as f1:
+            with open('./DataSave/data.csv', 'a', encoding='utf-8') as f1:
                 writer = csv.writer(f1)
                 writer.writerow([nickname, text, timeline])
 
 
 if __name__ == '__main__':
-
     bDanmu = Danmu()
     bDanmu.get_Danmu_room()
     bDanmu.get_Danmu_admin()
