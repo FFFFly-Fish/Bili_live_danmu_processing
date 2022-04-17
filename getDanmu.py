@@ -12,7 +12,7 @@ class Danmu():
         }
         # 定义post参数
         self.data = {
-            'roomid': '33989',  # 直播房间id,不一定是直播间号
+            'roomid': '5170',  # 直播房间id,不一定是直播间号
             'csrf_token': '',
             'csrf': '',
             'visit_id': '',
@@ -25,38 +25,40 @@ class Danmu():
             nickname = content['nickname']
             text = content['text']
             timeline = content['timeline']
+            uid = content['uid']
 
-            # msg_json = [{
-            #     '用户': nickname,
-            #     '内容': text,
-            #     '时间': timeline
-            # }]
-            # # print(msg_json)  # 查看json格式
+            msg_json = [{
+                '用户': nickname,
+                '内容': text,
+                '时间': timeline
+            }]
+            # print(msg_json)  # 查看json格式
 
             # 存为csv文件
             with open('./DataSave/data.csv', 'a', encoding='utf-8') as f1:
                 writer = csv.writer(f1)
-                writer.writerow([nickname, text, timeline])
+                writer.writerow([nickname, text, timeline,uid])
 
-    # 获取弹幕接口中data - admin的弹幕（应该是房管或舰长弹幕）
+    # 获取弹幕接口中data - admin的弹幕（应该是房管弹幕）
     def get_Danmu_admin(self):
         html = requests.post(url=self.url, headers=self.header, data=self.data).json()
         for content in html['data']['admin']:
             nickname = content['nickname']
             text = content['text']
             timeline = content['timeline']
+            uid=content['uid']
 
-            # msg_json = [{
-            #     '用户': nickname,
-            #     '内容': text,
-            #     '时间': timeline
-            # }]
+            msg_json = [{
+                '用户': nickname,
+                '内容': text,
+                '时间': timeline
+            }]
             # print(msg_json)  # 查看json格式
 
             # 存为csv文件
             with open('./DataSave/data.csv', 'a', encoding='utf-8') as f1:
                 writer = csv.writer(f1)
-                writer.writerow([nickname, text, timeline])
+                writer.writerow([nickname, text, timeline,uid])
 
 
 if __name__ == '__main__':
