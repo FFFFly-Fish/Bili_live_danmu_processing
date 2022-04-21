@@ -1,3 +1,4 @@
+import os.path
 import subprocess
 import time
 import func_timeout
@@ -7,7 +8,7 @@ import configparser
 config = configparser.ConfigParser()
 config.read("config.ini", encoding='utf-8')
 runtime = int(config["Runtime"]["second"])
-sleeptime = int(config["Sleeptime"]["second"])
+sleeptime = float(config["Sleeptime"]["second"])
 
 
 # 运行爬虫程序
@@ -27,6 +28,9 @@ def Ana():
 
 # 设置运行爬虫，爬虫运行结束后运行分析程序
 try:
+    # 如果不存在DataSave文件夹，则创建一个
+    if not os.path.exists('./DataSave'):
+        os.makedirs('./DataSave')
     GetAndClean()
 except:
     Ana()
