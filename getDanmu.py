@@ -55,7 +55,7 @@ class Danmu():
                 '内容': text,
                 '时间': timeline
             }]
-            print(msg_json)  # 查看json格式
+            # print(msg_json)  # 查看json格式
 
             # 存为csv文件
             with open('./DataSave/data.csv', 'a', encoding='utf-8') as f1:

@@ -7,6 +7,10 @@ df = pd.DataFrame(data)
 user = df['nickname']  # 获取昵称列
 text = df['text']  # 获取内容列
 
+# 读取关键词白名单
+file=open('whitelist.txt',encoding='utf-8')
+file_1=list(file)
+whitelists=[x.strip() for x in file_1]  #去除换行符
 
 # 用户发言数量统计
 def user_count():
@@ -19,8 +23,8 @@ def user_count():
     user_result.sort(key=lambda x: x[1], reverse=True)
     user_column_name = ['nickname', 'times']
     user_df = pd.DataFrame(columns=user_column_name, data=user_result)
-    user_df.to_csv('./DataSave/user_result.csv', encoding='utf-8')
     print(user_df)
+    return user_df
 
 
 # 关键词频率统计
@@ -30,14 +34,12 @@ def keyword_count():
 
     counts = {}
     for word in text_cut:
-        if word == "草":  # 关键字白名单
+        if word in whitelists:  # 关键字白名单
             counts[word] = counts.get(word, 0) + 1
         elif word == "哈哈":  # 设置近似词语合并
             rword = "哈哈哈"
         elif word == "哈哈哈哈":
             rword = "哈哈哈"
-        elif word == "qq":
-            rword = "QQ"
         elif len(word) == 1:  # 排除单个汉字和标点符号
             continue
         else:
@@ -49,9 +51,11 @@ def keyword_count():
 
     text_column_name = ['keywords', 'times']
     text_df = pd.DataFrame(columns=text_column_name, data=text_result)  # 转换回dataframe数据并保存
-    text_df.to_csv('./DataSave/text_result.csv', encoding='utf-8')
     print(text_df)
+    return text_df
 
 
-user_count()
-keyword_count()
+if __name__ == '__main__':
+    user_count().to_csv('./DataSave/user_result.csv', encoding='utf-8')
+    keyword_count().to_csv('./DataSave/text_result.csv', encoding='utf-8')
+
